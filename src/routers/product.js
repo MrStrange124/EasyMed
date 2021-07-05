@@ -1,9 +1,10 @@
 const express = require('express')
 const Product = require('../model/product')
+const auth = require('../middleware/auth')
 
 const router = new express.Router()
 
-router.post('/products', async (req, res) => {
+router.post('/products', auth, async (req, res) => {
   try {
     const product = new Product(req.body)
     await product.save()
@@ -22,7 +23,7 @@ router.get('/products', async (req, res) => {
   }
 })
 
-router.patch('/products/:id', async (req, res) => {
+router.patch('/products/:id', auth, async (req, res) => {
   try {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
     if (!product) {
@@ -34,7 +35,7 @@ router.patch('/products/:id', async (req, res) => {
   }
 })
 
-router.delete('/products/:id', async (req, res) => {
+router.delete('/products/:id', auth, async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id)
     res.send(product)
