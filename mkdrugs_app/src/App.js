@@ -1,10 +1,15 @@
-import './App.css';
-
+import Header from "./components/layout/Header";
+import Main from "./components/layout/Main";
+import './App.css'
 function App() {
   return (
-    <h1>
-      hello world
-    </h1>
+    <>
+      <Header />
+      <Main />
+      <h1>
+        hello world
+      </h1>
+    </>
   );
 }
 

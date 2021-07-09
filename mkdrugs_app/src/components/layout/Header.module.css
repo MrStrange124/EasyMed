@@ -1,0 +1,63 @@
+.navbar {
+	position: sticky;
+	top: 0;
+	text-align: center;
+	background-color: #007bff;
+	padding: 0.5rem 2rem;
+	display: flex;
+	align-items: center;
+	padding-right: 1.5rem;
+	z-index: 100;
+	box-shadow: 2px 0px 8px #34495e;
+}
+.navbar_brand {
+	color: white;
+	text-decoration: none;
+	font-family: fantasy;
+	font-size: 1.5rem;
+	width: 25%;
+	text-align: left;
+}
+.nav_container {
+	width: 75%;
+	display: flex;
+	flex-direction: row-reverse;
+}
+.btn {
+	font-size: 1.2rem;
+	font-family: serif;
+	font-weight: 100;
+	background-color: #007bff;
+	color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	padding: 0.5rem 0.75rem;
+	margin: 0.5rem;
+}
+.btn:hover {
+	cursor: pointer;
+	background-color: white;
+	color: #212529;
+}
+.cart_item {
+	padding: 0.1rem 0.4rem;
+	color: #007bff;
+	background-color: #d2dae2;
+	border-radius: 50%;
+}
+.btn:hover span {
+	background-color: #808e9b;
+	color: white;
+}
+@media (max-width: 786px) {
+	.navbar {
+		padding: 0 0.5rem 0 1rem;
+	}
+	.navbar_brand {
+		font-size: 1.2rem;
+	}
+	.btn {
+		font-size: 1rem;
+		margin: 0.75rem 0.25rem;
+	}
+}
