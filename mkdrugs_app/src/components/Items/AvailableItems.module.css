@@ -1,0 +1,10 @@
+.item_container {
+	width: 100%;
+	background-color: #2874f0;
+	padding: 3rem 0;
+}
+@media (max-width: 768px) {
+	.item_container {
+		background-color: #0572bc;
+	}
+}
