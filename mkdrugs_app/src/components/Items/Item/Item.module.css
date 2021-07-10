@@ -6,7 +6,7 @@
 	display: flex;
 }
 .product_details {
-	width: 70%;
+	width: 75%;
 	/* border: 2px solid red; */
 }
 .name {
@@ -32,7 +32,7 @@
 }
 
 .item_foam {
-	width: 30%;
+	width: 25%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -58,7 +58,9 @@
 	-moz-appearance: textfield;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
+	/* .product_details {
+	} */
 	.name {
 		font-size: 1.5rem;
 	}

@@ -3,6 +3,18 @@
 	background-color: #2874f0;
 	padding: 3rem 0;
 }
+.search_bar {
+	width: 100%;
+	padding: 0.3rem 0.6rem;
+	font-size: 1.1rem;
+}
+.errorMessage {
+	font-size: 1.2rem;
+	text-align: center;
+	padding-top: 1rem;
+	font-family: fantasy;
+	font-weight: 500;
+}
 @media (max-width: 768px) {
 	.item_container {
 		background-color: #0572bc;

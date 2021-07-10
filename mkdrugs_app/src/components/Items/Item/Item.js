@@ -1,7 +1,7 @@
 import classes from './Item.module.css'
 
 const Item = (props) => {
-  const percentage = (props.price - props.rate) / props.rate * 100
+  let percentage = Math.floor((props.price - props.rate) / props.rate * 100)
   return (
     <li className={classes.item}>
       <div className={classes.product_details}>
