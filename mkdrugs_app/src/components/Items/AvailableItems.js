@@ -24,6 +24,7 @@ const dummy = [{
 
 const totalItems = dummy.map(item => <Item
   key={item.id}
+  id={item.id}
   name={item.name}
   price={item.price}
   rate={item.rate}
@@ -52,7 +53,11 @@ const AvailableItems = () => {
   return (
     <section className={classes.item_container}>
       <Card>
-        <input type="text" className={classes.search_bar} placeholder="Search name here..." onChange={filterProductHandler} />
+        <input
+          type="text"
+          className={classes.search_bar}
+          placeholder="Search name here..."
+          onChange={filterProductHandler} />
         {!Items.length && <p className={classes.errorMessage}>No result found</p>}
         <ul>
           {Items}
