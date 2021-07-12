@@ -3,19 +3,19 @@ import Card from '../UI/Card'
 import Item from './Item/Item'
 import { useEffect, useState } from 'react'
 const dummy = [{
-  name: "product 1",
+  name: "Product 1",
   id: 1,
   price: 25,
   rate: 20,
   description: "this is my first product"
 }, {
-  name: "product 2",
+  name: "Product 2",
   id: 2,
   price: 15,
   rate: 12,
   description: "this is my second product"
 }, {
-  name: "product 3",
+  name: "Product 3",
   id: 3,
   price: 30,
   rate: 25,
