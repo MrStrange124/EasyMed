@@ -10,7 +10,9 @@ const Cart = (props) => {
   const addToCartHandler = (item) => {
     cartCtx.addItem({ ...item, quantity: 1 })
   }
-
+  const removeCartItemHandler = (id) => {
+    cartCtx.removeItem(id)
+  }
 
   const isCartEmpty = !cartCtx.totalAmount
   const cartItems = cartCtx.items.map(item => <CartItem
@@ -19,6 +21,7 @@ const Cart = (props) => {
     rate={item.rate}
     quantity={item.quantity}
     onAdd={addToCartHandler.bind(null, item)}
+    onRemove={removeCartItemHandler.bind(null, item.id)}
   />)
 
 
