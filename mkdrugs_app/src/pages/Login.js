@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './Login.css'
 
-
 const Login = props => {
   const [isActive, setIsActive] = useState(true)
   const toggleClass = () => {
@@ -71,7 +70,7 @@ const Login = props => {
                 <a href="#" className="social-icon">
                   <i className="fab fa-google"></i>
                 </a>
-                <a href="#" className="social-icon">
+                <a href="#a" className="social-icon">
                   <i className="fab fa-linkedin-in"></i>
                 </a>
               </div>
