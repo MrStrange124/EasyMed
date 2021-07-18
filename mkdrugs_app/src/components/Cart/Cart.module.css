@@ -1,11 +1,14 @@
-.empty {
+.empty h2 {
+	margin-top: 1rem;
 	font-family: monospace;
 	font-size: 1.6rem;
 	text-align: center;
-	padding: 1rem;
-	border: 1px solid black;
 }
-
+.empty p {
+	text-align: center;
+	margin-top: 0.5rem;
+	font-size: 1rem;
+}
 .end_container {
 	margin-top: 1.2rem;
 	display: flex;

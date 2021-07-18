@@ -38,7 +38,7 @@ const Item = (props) => {
           placeholder="1"
           ref={inputRef}
         />
-        <button className={classes.add_btn} onClick={() => addToCartHandler(+inputRef.current.value)} >Add to Card</button>
+        <button className={classes.add_btn} onClick={() => addToCartHandler(+inputRef.current.value)} >Add to Cart</button>
       </div>
     </li>
   )

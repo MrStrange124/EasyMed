@@ -21,7 +21,7 @@ const Checkout = (props) => {
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameInputBlurHandler,
     reset: resetNameInput
-  } = useInput(value => value.trim() !== '')
+  } = useInput(value => value.trim() !== '' && value.length < 50)
 
   const {
     value: enteredAddress,
@@ -30,7 +30,7 @@ const Checkout = (props) => {
     valueChangeHandler: addressChangeHandler,
     inputBlurHandler: addressInputBlurHandler,
     reset: resetAddressInput
-  } = useInput(value => value.trim() !== '')
+  } = useInput(value => value.trim() !== '' && value.length < 200)
 
   const {
     value: enteredNumber,
@@ -70,13 +70,18 @@ const Checkout = (props) => {
       formTouched()
       return
     }
+
+    let num = enteredNumber
+    if (num.length === 13)
+      num = num.slice(3)
+
     const userDetails = {
       name: enteredName,
-      number: +enteredNumber,
+      number: +num,
       pincode: +enteredPincode,
       address: enteredAddress
     }
-    console.log(userDetails)
+    props.placeOrder(userDetails)
     resetForm()
   }
 

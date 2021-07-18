@@ -31,6 +31,10 @@
 	left: 0.5rem;
 	font-size: 1rem;
 }
+.user_box input:-webkit-autofill {
+	box-shadow: 0;
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+}
 .error label {
 	color: red;
 	top: 0.5rem;
@@ -42,6 +46,7 @@
 	color: red;
 }
 .valid label {
+	color: #576574;
 	top: 0.5rem;
 	left: 0.5rem;
 	font-size: 1rem;
