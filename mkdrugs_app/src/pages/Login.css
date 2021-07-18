@@ -2,7 +2,7 @@
 	position: relative;
 	width: 100%;
 	background-color: #fff;
-	min-height: calc(100vh - 4.5rem);
+	min-height: calc(100vh - 4.7rem);
 	overflow: hidden;
 }
 
@@ -60,18 +60,19 @@ form.sign-in-form {
 	margin: 10px 0;
 	height: 55px;
 	border-radius: 55px;
-	display: grid;
-	grid-template-columns: 15% 85%;
+	/* display: grid; */
+	/* grid-template-columns: 15% 85%; */
 	padding: 0 0.4rem;
-	position: relative;
+	/* position: relative; */
+	display: flex;
+	align-items: center;
 }
 
-.input-field i {
-	text-align: center;
-	line-height: 55px;
+.input-field svg {
 	color: #acacac;
 	transition: 0.5s;
 	font-size: 1.1rem;
+	flex-basis: 15%;
 }
 
 .input-field input {
@@ -264,7 +265,7 @@ form.sign-in-form {
 	}
 	.signin-signup {
 		width: 100%;
-		top: 85%;
+		top: 80%;
 		transform: translate(-50%, -100%);
 		transition: 1s 0.8s ease-in-out;
 	}
@@ -308,12 +309,11 @@ form.sign-in-form {
 	}
 
 	.panel h3 {
-		font-size: 1.2rem;
+		font-size: 1.4rem;
 	}
 
 	.panel p {
-		font-size: 0.7rem;
-		padding: 0.5rem 0;
+		padding: 1rem 0;
 	}
 
 	.btn.transparent {
@@ -381,7 +381,10 @@ form.sign-in-form {
 	}
 
 	.container.sign-up-mode:before {
-		bottom: 28%;
+		bottom: 34%;
 		left: 50%;
+	}
+	.container.sign-up-mode .right-panel .content {
+		transform: translateY(-20px);
 	}
 }

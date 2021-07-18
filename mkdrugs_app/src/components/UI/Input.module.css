@@ -1,0 +1,70 @@
+.user_box {
+	position: relative;
+	left: -25%;
+	width: 80%;
+	/* border: 1px solid blue; */
+	margin: 0.2rem;
+	padding: 0.5rem;
+}
+.user_box input {
+	border: none;
+	width: 100%;
+	background-color: white;
+	border-bottom: 1px solid black;
+	padding: 0.3rem;
+	font-size: 1rem;
+}
+.user_box input:focus {
+	outline: none;
+}
+.user_box label {
+	color: black;
+	position: absolute;
+	top: 50%;
+	left: 3%;
+	transform: translateY(-70%);
+	transition: 0.3s;
+	font-size: 1.2rem;
+}
+.user_box input:focus ~ label {
+	top: 0.5rem;
+	left: 0.5rem;
+	font-size: 1rem;
+}
+.error label {
+	color: red;
+	top: 0.5rem;
+	left: 0.5rem;
+	font-size: 1rem;
+}
+.error input {
+	border-bottom: 1px solid red;
+	color: red;
+}
+.valid label {
+	top: 0.5rem;
+	left: 0.5rem;
+	font-size: 1rem;
+}
+@media (max-width: 786px) {
+	.user_box {
+		left: 0;
+		width: 100%;
+	}
+	.user_box input {
+		font-size: 1rem;
+		padding: 0.3rem;
+	}
+	.user_box input:focus ~ label {
+		font-size: 0.8rem;
+	}
+	.user_box label {
+		font-size: 1rem;
+	}
+	.valid label {
+		font-size: 0.8rem;
+	}
+	.error label {
+		font-size: 0.8rem;
+	}
+}

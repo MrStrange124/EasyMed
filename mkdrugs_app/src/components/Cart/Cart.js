@@ -2,11 +2,13 @@ import Modal from "../UI/Modal"
 import classes from './Cart.module.css'
 import CartItem from "./CartItem"
 import CartContext from '../../store/cart-context'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import Checkout from "./Checkout"
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext)
-
+  const [showCart, setShowCart] = useState(true)
+  console.log(cartCtx.items)
   const addToCartHandler = (item) => {
     cartCtx.addItem({ ...item, quantity: 1 })
   }
@@ -27,12 +29,14 @@ const Cart = (props) => {
 
   return (
     <Modal onClose={props.onClose}>
-      {cartItems}
+      {showCart && cartItems}
       {isCartEmpty && <h2 className={classes.empty}>Your Cart is Empty!!!</h2>}
+      {!showCart && <Checkout />}
       <div className={classes.end_container}>
         {!isCartEmpty && <h2 className={classes.total}>Total: ₹{cartCtx.totalAmount}</h2>}
         <button onClick={() => props.onClose()} className={classes.close_btn}>Close</button>
-        {!isCartEmpty && <button className={classes.order_btn}>Order</button>}
+        {!isCartEmpty && showCart && <button className={classes.order_btn} onClick={() => setShowCart(false)}>Order</button>}
+        {!isCartEmpty && !showCart && <button className={classes.order_btn} type="submit" form="myform">Place Order</button>}
       </div>
     </Modal>
   )

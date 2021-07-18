@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FaUserAlt, FaLock, FaEnvelope, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa'
 import './Login.css'
 
 const Login = props => {
@@ -6,7 +7,6 @@ const Login = props => {
   const toggleClass = () => {
     setIsActive(!isActive)
   }
-
   const LoginPage = () => {
     return (
       <div className={isActive ? "container" : "container sign-up-mode"}>
@@ -15,7 +15,8 @@ const Login = props => {
             <form action="#" className="sign-in-form">
               <h2 className="title">Sign In</h2>
               <div className="input-field">
-                <i className="fas fa-user"></i>
+                {/* <i className="fas fa-user"></i> */}
+                <FaUserAlt />
                 <input
                   type="text"
                   placeholder="Username"
@@ -24,54 +25,66 @@ const Login = props => {
                 />
               </div>
               <div className="input-field">
-                <i className="fas fa-lock"></i>
+                {/* <i className="fas fa-lock"></i> */}
+                <FaLock />
                 <input type="password" placeholder="password" />
               </div>
               <input type="button" value="Sign In" className="btn solid" />
               <p className="social-text">Or sign up with social platforms</p>
               <div className="social-media">
-                <a href="#" className="social-icon">
-                  <i className="fab fa-facebook-f"></i>
+                <a href="https://www.facebook.com/" className="social-icon">
+                  {/* <i className="fab fa-facebook-f"></i> */}
+                  <FaFacebookF />
                 </a>
-                <a href="#" className="social-icon">
-                  <i className="fab fa-twitter"></i>
+                <a href="https://twitter.com/" className="social-icon">
+                  {/* <i className="fab fa-twitter"></i> */}
+                  <FaTwitter />
                 </a>
-                <a href="#" className="social-icon">
-                  <i className="fab fa-google"></i>
+                <a href="https://www.google.com/" className="social-icon">
+                  {/* <i className="fab fa-google"></i> */}
+                  <FaGoogle />
                 </a>
-                <a href="#" className="social-icon">
-                  <i className="fab fa-linkedin-in"></i>
+                <a href="https://www.linkedin.com/" className="social-icon">
+                  {/* <i className="fab fa-linkedin-in"></i> */}
+                  <FaLinkedinIn />
                 </a>
               </div>
             </form>
             <form action="#" className="sign-up-form">
               <h2 className="title">Register</h2>
               <div className="input-field">
-                <i className="fas fa-user"></i>
+                {/* <i className="fas fa-user"></i> */}
+                <FaUserAlt />
                 <input type="text" placeholder="Username" />
               </div>
               <div className="input-field">
-                <i className="fas fa-envelope"></i>
+                {/* <i className="fas fa-envelope"></i> */}
+                <FaEnvelope />
                 <input type="email" placeholder="Email" />
               </div>
               <div className="input-field">
-                <i className="fas fa-lock"></i>
+                {/* <i className="fas fa-lock"></i> */}
+                <FaLock />
                 <input type="password" placeholder="password" />
               </div>
               <input type="submit" className="btn" value="Register" />
               <p className="social-text">or sign up with social platforms</p>
               <div className="social-media">
-                <a href="#" className="social-icon">
-                  <i className="fab fa-facebook-f"></i>
+                <a href="https://www.facebook.com/" className="social-icon">
+                  {/* <i className="fab fa-facebook-f"></i> */}
+                  <FaFacebookF />
                 </a>
-                <a href="#" className="social-icon">
-                  <i className="fab fa-twitter"></i>
+                <a href="https://twitter.com/" className="social-icon">
+                  {/* <i className="fab fa-twitter"></i> */}
+                  <FaTwitter />
                 </a>
-                <a href="#" className="social-icon">
-                  <i className="fab fa-google"></i>
+                <a href="https://www.google.com/" className="social-icon">
+                  {/* <i className="fab fa-google"></i> */}
+                  <FaGoogle />
                 </a>
-                <a href="#a" className="social-icon">
-                  <i className="fab fa-linkedin-in"></i>
+                <a href="https://www.linkedin.com/" className="social-icon">
+                  {/* <i className="fab fa-linkedin-in"></i> */}
+                  <FaLinkedinIn />
                 </a>
               </div>
             </form>
@@ -94,7 +107,7 @@ const Login = props => {
           <div className="panel right-panel">
             <div className="content">
               <h3>Do you already have an account?</h3>
-              <p>Login</p>
+              <p>Click down below to login</p>
               <button className="btn transparent" id="sign-in-btn" onClick={toggleClass}>Sign In</button>
             </div>
             <img
