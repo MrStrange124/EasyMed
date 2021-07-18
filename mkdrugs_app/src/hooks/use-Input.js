@@ -29,4 +29,4 @@ const useInput = (validateValue) => {
   }
 }
 
-module.exports = useInput
+export default useInput
