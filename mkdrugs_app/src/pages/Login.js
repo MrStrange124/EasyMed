@@ -27,7 +27,7 @@ const Login = props => {
               <div className="input-field">
                 {/* <i className="fas fa-lock"></i> */}
                 <FaLock />
-                <input type="password" placeholder="password" />
+                <input type="current-password" placeholder="password" />
               </div>
               <input type="button" value="Sign In" className="btn solid" />
               <p className="social-text">Or sign up with social platforms</p>
@@ -65,7 +65,7 @@ const Login = props => {
               <div className="input-field">
                 {/* <i className="fas fa-lock"></i> */}
                 <FaLock />
-                <input type="password" placeholder="password" />
+                <input type="current-password" placeholder="password" />
               </div>
               <input type="submit" className="btn" value="Register" />
               <p className="social-text">or sign up with social platforms</p>

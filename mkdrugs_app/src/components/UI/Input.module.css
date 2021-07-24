@@ -1,6 +1,6 @@
 .user_box {
 	position: relative;
-	left: -25%;
+	/* left: -25%; */
 	width: 80%;
 	/* border: 1px solid blue; */
 	margin: 0.2rem;
@@ -11,7 +11,7 @@
 	width: 100%;
 	background-color: white;
 	border-bottom: 1px solid black;
-	padding: 0.3rem;
+	padding: 0.4rem 0 0.1rem 0.3rem;
 	font-size: 1rem;
 }
 .user_box input:focus {
@@ -58,7 +58,6 @@
 	}
 	.user_box input {
 		font-size: 1rem;
-		padding: 0.3rem;
 	}
 	.user_box input:focus ~ label {
 		font-size: 0.8rem;

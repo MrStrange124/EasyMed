@@ -21,7 +21,7 @@ const Header = () => {
   }, 0)
   return (
     <nav className={classes.navbar}>
-      <a className={classes.navbar_brand} href="#brandname">Mk Drugs</a>
+      <a className={classes.navbar_brand} href="#brandname">EasyMed</a>
       <div className={classes.nav_container}>
         <button className={classes.btn} onClick={() => setShowCart(true)}><FaCartPlus /> Cart <span className={classes.cart_item}>{totalItems}</span> </button>
         <Link

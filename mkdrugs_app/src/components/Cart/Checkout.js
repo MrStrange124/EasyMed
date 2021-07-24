@@ -65,7 +65,7 @@ const Checkout = (props) => {
 
   const submitHandler = event => {
     event.preventDefault()
-    const isFormValid = enteredNameIsValid && enteredNumberIsValid && enteredPincode && enteredAddressIsValid
+    const isFormValid = enteredNameIsValid && enteredNumberIsValid && enteredPincodeIsValid && enteredAddressIsValid
     if (!isFormValid) {
       formTouched()
       return
@@ -87,7 +87,7 @@ const Checkout = (props) => {
 
   return (
     <div className={classes.login_box}>
-      <h1>Add Address Details</h1>
+      <h2 className={classes.title}>Add Address Details</h2>
       <form onSubmit={submitHandler} id="myform">
         <Input
           label="Name"
@@ -119,7 +119,7 @@ const Checkout = (props) => {
           validInput={enteredPincodeIsValid}
           input={{
             id: "pincode",
-            type: "text",
+            type: "number",
             value: enteredPincode
           }}
           onChange={(e) => pincodeChangeHandler(e)}

@@ -3,9 +3,9 @@
 	border-radius: 10px;
 	padding: 1rem;
 }
-.login_box h1 {
+.title {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	text-align: center;
-	font-family: fantasy;
 	margin-bottom: 1rem;
 }
 
