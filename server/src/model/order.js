@@ -1,29 +1,45 @@
 const mongoose = require('mongoose')
 
 const OrderSchema = new mongoose.Schema({
-  user: {
+  customer: {
     name: {
       type: String,
       trim: true,
-      required: true
+      required: true,
+      validate(value) {
+        if (value.length > 50)
+          throw new Error("Name can't be longer 50 char")
+      }
     },
-    street: {
+    address: {
       type: String,
       trim: true,
-      required: true
+      required: true,
+      validate(value) {
+        if (value.length > 150)
+          throw new Error("Address can't be longer 150 char")
+      }
     },
-    city: {
-      type: String,
-      trim: true,
-      required: true
-    },
-    postalCode: {
+    number: {
       type: Number,
       trim: true,
-      required: true
+      required: true,
+      validate(value) {
+        if (value.toString().length != 10)
+          throw new Error("Invalid Phone No.")
+      }
+    },
+    pincode: {
+      type: Number,
+      trim: true,
+      required: true,
+      validate(value) {
+        if (value.toString().length != 6)
+          throw new Error("Invalid PinCode")
+      }
     }
   },
-  orderedItems: [
+  Items: [
     {
       id: {
         type: Number,
@@ -32,18 +48,39 @@ const OrderSchema = new mongoose.Schema({
       name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        validate(value) {
+          if (value.length > 50)
+            throw new Error("Name can't be longer 50 char")
+        }
       },
-      amount: {
+      quantity: {
         type: Number,
-        required: true
+        required: true,
+        validate(value) {
+          if (value > 10000)
+            throw new Error("Too big order")
+        }
       },
-      price: {
+      rate: {
         type: Number,
-        required: true
+        required: true,
+        validate(value) {
+          if (value > 100000)
+            throw new Error("Rate invalid")
+        }
       }
     }
-  ]
+  ],
+  totalAmount: {
+    type: Number,
+    required: true,
+    validate(value) {
+      if (value > 1000000)
+        throw new Error("TotalAmount is too big")
+    }
+
+  }
 }, {
   timestamps: true
 })
