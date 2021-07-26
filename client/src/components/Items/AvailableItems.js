@@ -8,8 +8,11 @@ const AvailableItems = () => {
   const [Items, setItems] = useState([])
 
   useEffect(() => {
+    let fetching = true;
     const fetchItems = async () => {
       const response = await fetch('http://192.168.43.249:5000/products');
+      if (!fetching)
+        return
       const responseData = await response.json();
       if (!response.ok) {
         throw new Error('something went worng');
@@ -31,6 +34,7 @@ const AvailableItems = () => {
       setItems(loadedItems)
     }
     fetchItems()
+    return () => (fetching = false)
   }, [])
 
   const filterProductHandler = (event) => {

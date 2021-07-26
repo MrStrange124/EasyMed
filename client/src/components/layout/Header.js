@@ -7,7 +7,7 @@ import { FaCartPlus } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-const Header = (props) => {
+const Header = () => {
   const [showCart, setShowCart] = useState(false)
   const [homeBtn, setHomeBtn] = useState(false)
   const { pathname } = useLocation()
@@ -37,7 +37,7 @@ const Header = (props) => {
       console.log('something went wrong')
       return
     }
-    props.setLogin()
+    cartCtx.setLogin(false)
     setCookie('jwt', '')
   }
 
@@ -46,14 +46,14 @@ const Header = (props) => {
       <a className={classes.navbar_brand} href="#brandname">EasyMed</a>
       <div className={classes.nav_container}>
         <button className={classes.btn} onClick={() => setShowCart(true)}><FaCartPlus /> Cart <span className={classes.cart_item}>{totalItems}</span> </button>
-        {!props.islogin &&
+        {!cartCtx.isLoggedin &&
           <Link
             to={!homeBtn ? "/Login" : "/Home"}
             className={classes.btn}
             onClick={() => setHomeBtn(!homeBtn)
             }>{homeBtn ? "Home" : "Login"}
           </Link>}
-        {props.islogin && <button className={classes.btn} onClick={logoutHandler}>Logout</button>}
+        {cartCtx.isLoggedin && <button className={classes.btn} onClick={logoutHandler}>Logout</button>}
         {showCart && <Cart onClose={() => setShowCart(false)} />}
       </div>
     </nav>

@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import CartContext from './cart-context'
 
 const defaultCartState = {
@@ -58,6 +58,7 @@ const cartReducer = (state, action) => {
 
 const CartProvider = props => {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState)
+  const [isLogin, setIsLogin] = useState(false)
 
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item: item })
@@ -69,12 +70,18 @@ const CartProvider = props => {
     dispatchCartAction({ type: 'CLEAR' })
   }
 
+  const loginHandler = (value) => {
+    setIsLogin(value)
+  }
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
-    clearCart: clearCartHandler
+    clearCart: clearCartHandler,
+    isLoggedin: isLogin,
+    setLogin: loginHandler
   }
 
   return (

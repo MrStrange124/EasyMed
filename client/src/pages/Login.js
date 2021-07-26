@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { FaUserAlt, FaLock, FaEnvelope, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa'
 import './Login.css'
-const Login = props => {
+const Login = () => {
   const [isActive, setIsActive] = useState(true)
   const [invalidCredentials, setInvalidCredentials] = useState(false)
   const [cookies, setCookie] = useCookies(['jwt']);
@@ -37,7 +37,6 @@ const Login = props => {
     }
     const responseData = await response.json()
     setCookie('jwt', responseData.token, { maxAge: 60 * 60 * 24 * 30 });
-    props.setLogin()
   }
 
   const LoginPage = () => {

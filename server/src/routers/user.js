@@ -45,4 +45,8 @@ router.post('/users/logoutAll', auth, async (req, res) => {
   }
 })
 
+router.post('/users/verify', auth, (req, res) => {
+  res.send()
+})
+
 module.exports = router
