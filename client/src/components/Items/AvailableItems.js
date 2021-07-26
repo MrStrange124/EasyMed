@@ -2,40 +2,35 @@ import classes from './AvailableItems.module.css'
 import Card from '../UI/Card'
 import Item from './Item/Item'
 import { useEffect, useState } from 'react'
-const dummy = [{
-  name: "Product 1",
-  id: 1,
-  price: 25,
-  rate: 20,
-  description: "this is my first product"
-}, {
-  name: "Product 2",
-  id: 2,
-  price: 15,
-  rate: 12,
-  description: "this is my second product"
-}, {
-  name: "Product 3",
-  id: 3,
-  price: 30,
-  rate: 25,
-  description: "this is my third product"
-}]
-
-const totalItems = dummy.map(item => <Item
-  key={item.id}
-  id={item.id}
-  name={item.name}
-  price={item.price}
-  rate={item.rate}
-  description={item.description}
-/>)
 
 const AvailableItems = () => {
+  const [totalItems, setTotalItems] = useState([])
   const [Items, setItems] = useState([])
 
   useEffect(() => {
-    setItems(totalItems)
+    const fetchItems = async () => {
+      const response = await fetch('http://192.168.43.249:5000/products');
+      const responseData = await response.json();
+      if (!response.ok) {
+        throw new Error('something went worng');
+      }
+      const loadedItems = []
+      for (const key in responseData) {
+        loadedItems.push(
+          <Item
+            key={responseData[key]._id}
+            id={responseData[key]._id}
+            name={responseData[key].name}
+            price={responseData[key].price}
+            rate={responseData[key].rate}
+            description={responseData[key].description}
+          />
+        )
+      }
+      setTotalItems(loadedItems)
+      setItems(loadedItems)
+    }
+    fetchItems()
   }, [])
 
   const filterProductHandler = (event) => {

@@ -9,16 +9,27 @@ const Cart = (props) => {
   const cartCtx = useContext(CartContext)
   const [showCartitems, setShowCartitems] = useState(true)
 
-  const placeOrderHandler = (userDetails) => {
-    const order = {
-      customer: userDetails,
-      items: cartCtx.items,
-      totalAmount: cartCtx.totalAmount
+  const placeOrderHandler = async (userDetails) => {
+
+    const response = await fetch("http://192.168.43.249:5000/orders", {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        customer: userDetails,
+        Items: cartCtx.items,
+        totalAmount: cartCtx.totalAmount
+      })
+    })
+    if (!response.ok) {
+      alert("something went wrong")
+      return
     }
-    console.log(order)
-    alert("Order Placed Successfully.");
     props.onClose()
     cartCtx.clearCart()
+    alert("Order Placed Successfully.");
   }
 
   const addToCartHandler = (item) => {

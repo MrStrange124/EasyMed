@@ -1,12 +1,45 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { FaUserAlt, FaLock, FaEnvelope, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa'
 import './Login.css'
-
 const Login = props => {
   const [isActive, setIsActive] = useState(true)
+  const [invalidCredentials, setInvalidCredentials] = useState(false)
+  const [cookies, setCookie] = useCookies(['jwt']);
+  const usernameRef = useRef()
+  const passwordRef = useRef()
+
   const toggleClass = () => {
     setIsActive(!isActive)
   }
+
+  if (false)
+    console.log(cookies)
+
+  const loginBtnHandler = async (event) => {
+    event.preventDefault()
+    if (usernameRef.current.value.length < 5 || passwordRef.current.value.length < 4)
+      return
+    const response = await fetch("http://192.168.43.249:5000/users/login", {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: usernameRef.current.value,
+        password: passwordRef.current.value
+      })
+    })
+    if (response.status === 401) {
+      setInvalidCredentials(true)
+      return
+    }
+    const responseData = await response.json()
+    setCookie('jwt', responseData.token, { maxAge: 60 * 60 * 24 * 30 });
+    props.setLogin()
+  }
+
   const LoginPage = () => {
     return (
       <div className={isActive ? "container" : "container sign-up-mode"}>
@@ -22,14 +55,16 @@ const Login = props => {
                   placeholder="Username"
                   name="Username"
                   id="Username"
+                  ref={usernameRef}
                 />
               </div>
               <div className="input-field">
                 {/* <i className="fas fa-lock"></i> */}
                 <FaLock />
-                <input type="current-password" placeholder="password" />
+                <input type="password" placeholder="password" ref={passwordRef} />
               </div>
-              <input type="button" value="Sign In" className="btn solid" />
+              {invalidCredentials && <p className="error_msg">Invalid Credentials</p>}
+              <button className="btn solid" onClick={loginBtnHandler}>Sign In</button>
               <p className="social-text">Or sign up with social platforms</p>
               <div className="social-media">
                 <a href="https://www.facebook.com/" className="social-icon">
@@ -65,7 +100,7 @@ const Login = props => {
               <div className="input-field">
                 {/* <i className="fas fa-lock"></i> */}
                 <FaLock />
-                <input type="current-password" placeholder="password" />
+                <input type="password" placeholder="password" />
               </div>
               <input type="submit" className="btn" value="Register" />
               <p className="social-text">or sign up with social platforms</p>
