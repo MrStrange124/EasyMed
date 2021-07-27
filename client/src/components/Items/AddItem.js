@@ -1,7 +1,10 @@
 import useInput from "../../hooks/use-Input";
 import Input from "../UI/Input";
 import classes from './AddItem.module.css'
+import { useCookies } from 'react-cookie'
 const AddItems = () => {
+  const [cookies] = useCookies(['jwt'])
+
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -49,7 +52,7 @@ const AddItems = () => {
     priceInputBlurHandler()
     rateInputBlurHandler()
   }
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     const isFormValid = enteredNameIsValid && enteredDescriptionIsValid && enteredPriceIsValid && enteredRateIsValid
     if (!isFormValid) {
@@ -62,9 +65,24 @@ const AddItems = () => {
       rate: +enteredRate,
       price: +enteredPrice
     }
+
+    const response = await fetch("http://192.168.43.249:5000/products", {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${cookies.jwt}`
+      },
+      body: JSON.stringify(itemDetail)
+    })
+    if (!response.ok) {
+      alert('something went worng.')
+      return
+    }
+
     resetForm()
-    console.log(itemDetail)
-    // alert("Your Item has been added successfully.")
+    alert("Your Item has been added successfully.")
+    window.location.reload(false)
   }
   return (
     <section className={classes.container}>

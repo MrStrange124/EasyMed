@@ -33,19 +33,6 @@ function App() {
       cartCtx.setLogin(false)
   }, [cookies.jwt])
 
-  const ProtectedRoute = props => {
-
-    if (!cartCtx.isLoggedin) {
-      return <Route> <Redirect to="/Home" /> </Route>
-    }
-
-    return (
-      <Route path={props.path}>
-        {props.children}
-      </Route>
-    )
-  }
-
   return (
     <>
       <Header />
@@ -62,10 +49,11 @@ function App() {
           {cartCtx.isLoggedin && <Redirect to="/Admin" />}
         </Route>
 
-        <ProtectedRoute path="/Admin" >
+        <Route path="/Admin" >
+          {!cartCtx.isLoggedin && <Redirect to="/Home" />}
           <AddItem />
           <AvailableItems />
-        </ProtectedRoute>
+        </Route>
 
         <Route path="*">
           <Redirect to="/Home" />

@@ -33,12 +33,13 @@ const AvailableItems = () => {
       setTotalItems(loadedItems)
       setItems(loadedItems)
     }
+
     fetchItems()
     return () => (fetching = false)
   }, [])
 
   const filterProductHandler = (event) => {
-    const userInput = event.target.value.toUpperCase()
+    const userInput = event.target.value.trim().toUpperCase()
     if (!userInput)
       setItems(totalItems)
     else {

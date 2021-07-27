@@ -5,7 +5,7 @@ import { useContext, useRef } from 'react'
 
 
 const Item = (props) => {
-  const percentage = Math.floor((props.price - props.rate) / props.rate * 100)
+  const percentage = Math.floor((props.price - props.rate) / props.price * 100)
   const cartCtx = useContext(CartContext)
   const inputRef = useRef()
 
