@@ -3,6 +3,8 @@ import Card from '../UI/Card'
 import Item from './Item/Item'
 import { useEffect, useState } from 'react'
 
+const URL = process.env.API_URL || "https://localhost:5000"
+
 const AvailableItems = () => {
   const [totalItems, setTotalItems] = useState([])
   const [Items, setItems] = useState([])
@@ -10,7 +12,7 @@ const AvailableItems = () => {
   useEffect(() => {
     let fetching = true;
     const fetchItems = async () => {
-      const response = await fetch('http://192.168.43.249:5000/products');
+      const response = await fetch(`${URL}/products`);
       if (!fetching)
         return
       const responseData = await response.json();

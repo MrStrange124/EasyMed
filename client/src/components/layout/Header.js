@@ -7,6 +7,9 @@ import { FaCartPlus } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
+const URL = process.env.API_URL || "https://localhost:5000"
+
+
 const Header = () => {
   const [showCart, setShowCart] = useState(false)
   const [homeBtn, setHomeBtn] = useState(false)
@@ -25,7 +28,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     setHomeBtn(false)
-    const response = await fetch("http://192.168.43.249:5000/users/logout", {
+    const response = await fetch(`${URL}/users/logout`, {
       method: "post",
       headers: {
         'Accept': 'application/json',

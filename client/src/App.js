@@ -9,13 +9,15 @@ import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import CartContext from "./store/cart-context";
 
+const URL = process.env.API_URL || "https://localhost:5000"
+
 function App() {
   const cartCtx = useContext(CartContext)
   const [cookies] = useCookies(['jwt'])
 
   useEffect(() => {
     const checkLogin = async () => {
-      const response = await fetch("http://192.168.43.249:5000/users/verify", {
+      const response = await fetch(`${URL}/users/verify`, {
         method: "post",
         headers: {
           'Accept': 'application/json',

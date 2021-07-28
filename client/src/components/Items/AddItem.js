@@ -2,6 +2,9 @@ import useInput from "../../hooks/use-Input";
 import Input from "../UI/Input";
 import classes from './AddItem.module.css'
 import { useCookies } from 'react-cookie'
+
+const URL = process.env.API_URL || "https://localhost:5000"
+
 const AddItems = () => {
   const [cookies] = useCookies(['jwt'])
 
@@ -66,7 +69,7 @@ const AddItems = () => {
       price: +enteredPrice
     }
 
-    const response = await fetch("http://192.168.43.249:5000/products", {
+    const response = await fetch(`${URL}/products`, {
       method: "post",
       headers: {
         'Accept': 'application/json',

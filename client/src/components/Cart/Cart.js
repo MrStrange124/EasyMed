@@ -5,13 +5,15 @@ import CartContext from '../../store/cart-context'
 import { useContext, useState } from 'react'
 import Checkout from "./Checkout"
 
+const URL = process.env.API_URL || "https://localhost:5000"
+
 const Cart = (props) => {
   const cartCtx = useContext(CartContext)
   const [showCartitems, setShowCartitems] = useState(true)
 
   const placeOrderHandler = async (userDetails) => {
 
-    const response = await fetch("http://192.168.43.249:5000/orders", {
+    const response = await fetch(`${URL}/orders`, {
       method: "post",
       headers: {
         'Accept': 'application/json',

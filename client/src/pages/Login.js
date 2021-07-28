@@ -2,6 +2,9 @@ import { useRef, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { FaUserAlt, FaLock, FaEnvelope, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa'
 import './Login.css'
+
+const URL = process.env.API_URL || "https://localhost:5000"
+
 const Login = () => {
   const [isActive, setIsActive] = useState(true)
   const [invalidCredentials, setInvalidCredentials] = useState(false)
@@ -20,7 +23,7 @@ const Login = () => {
     event.preventDefault()
     if (usernameRef.current.value.length < 5 || passwordRef.current.value.length < 4)
       return
-    const response = await fetch("http://192.168.43.249:5000/users/login", {
+    const response = await fetch(`${URL}/users/login`, {
       method: "post",
       headers: {
         'Accept': 'application/json',
