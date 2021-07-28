@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie'
 import { FaUserAlt, FaLock, FaEnvelope, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa'
 import './Login.css'
 
-const URL = process.env.API_URL || "https://localhost:5000"
+const URL = process.env.API_URL
 
 const Login = () => {
   const [isActive, setIsActive] = useState(true)

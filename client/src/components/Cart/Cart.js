@@ -5,7 +5,7 @@ import CartContext from '../../store/cart-context'
 import { useContext, useState } from 'react'
 import Checkout from "./Checkout"
 
-const URL = process.env.API_URL || "https://localhost:5000"
+const URL = process.env.API_URL
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext)

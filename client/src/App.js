@@ -9,7 +9,7 @@ import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import CartContext from "./store/cart-context";
 
-const URL = process.env.API_URL || "https://localhost:5000"
+const URL = process.env.API_URL
 
 function App() {
   const cartCtx = useContext(CartContext)

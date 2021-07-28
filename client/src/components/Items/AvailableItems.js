@@ -3,7 +3,7 @@ import Card from '../UI/Card'
 import Item from './Item/Item'
 import { useEffect, useState } from 'react'
 
-const URL = process.env.API_URL || "https://localhost:5000"
+const URL = process.env.API_URL
 
 const AvailableItems = () => {
   const [totalItems, setTotalItems] = useState([])

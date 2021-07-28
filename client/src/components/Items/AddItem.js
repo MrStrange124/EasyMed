@@ -3,7 +3,7 @@ import Input from "../UI/Input";
 import classes from './AddItem.module.css'
 import { useCookies } from 'react-cookie'
 
-const URL = process.env.API_URL || "https://localhost:5000"
+const URL = process.env.API_URL
 
 const AddItems = () => {
   const [cookies] = useCookies(['jwt'])

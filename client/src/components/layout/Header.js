@@ -7,7 +7,7 @@ import { FaCartPlus } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-const URL = process.env.API_URL || "https://localhost:5000"
+const URL = process.env.API_URL
 
 
 const Header = () => {
