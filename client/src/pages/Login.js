@@ -104,7 +104,9 @@ const Login = () => {
                 <input type="password" placeholder="password" />
               </div>
               <input type="submit" className="btn" value="Register" />
-              <p className="social-text">or sign up with social platforms</p>
+              <p className="error_msg">Currently we are not accepting new registration.</p>
+              <p className="error_msg social-text">You can still place your order.</p>
+              {/* <p className="social-text">or sign up with social platforms</p> */}
               <div className="social-media">
                 <a href="https://www.facebook.com/" className="social-icon">
                   {/* <i className="fab fa-facebook-f"></i> */}

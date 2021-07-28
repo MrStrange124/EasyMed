@@ -4,13 +4,17 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie';
 import CartProvider from "./store/CartProvider";
+import ProductProvider from './store/ProductProvider'
+
 ReactDOM.render(
   <BrowserRouter>
-    <CartProvider>
-      <CookiesProvider>
-        <App />
-      </CookiesProvider>
-    </CartProvider>
+    <ProductProvider>
+      <CartProvider>
+        <CookiesProvider>
+          <App />
+        </CookiesProvider>
+      </CartProvider>
+    </ProductProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );

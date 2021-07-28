@@ -8,12 +8,13 @@ import './App.css'
 import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import CartContext from "./store/cart-context";
+import ProductContext from "./store/product-context";
 
 
 function App() {
   const cartCtx = useContext(CartContext)
   const [cookies] = useCookies(['jwt'])
-
+  const productCtx = useContext(ProductContext)
   useEffect(() => {
     const checkLogin = async () => {
       const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/verify", {
@@ -32,6 +33,17 @@ function App() {
     }
     else
       cartCtx.setLogin(false)
+
+    //fetching products from server
+    const fetchItems = async () => {
+      const response = await fetch("https://adi36n-easy-med.herokuapp.com/products");
+      const responseData = await response.json();
+      if (!response.ok) {
+        throw new Error('something went worng');
+      }
+      productCtx.loadProduct(responseData)
+    }
+    fetchItems()
   }, [cookies.jwt])
 
   return (

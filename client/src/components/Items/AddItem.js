@@ -2,9 +2,12 @@ import useInput from "../../hooks/use-Input";
 import Input from "../UI/Input";
 import classes from './AddItem.module.css'
 import { useCookies } from 'react-cookie'
+import ProductContext from '../../store/product-context'
+import { useContext } from "react";
 
 const AddItems = () => {
   const [cookies] = useCookies(['jwt'])
+  const ProductCtx = useContext(ProductContext)
 
   const {
     value: enteredName,
@@ -83,7 +86,9 @@ const AddItems = () => {
 
     resetForm()
     alert("Your Item has been added successfully.")
-    window.location.reload(false)
+
+    const temp = [...ProductCtx.products, { ...itemDetail, _id: Math.random().toString() }]
+    ProductCtx.loadProduct(temp)
   }
   return (
     <section className={classes.container}>

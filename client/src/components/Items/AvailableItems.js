@@ -1,43 +1,33 @@
 import classes from './AvailableItems.module.css'
 import Card from '../UI/Card'
 import Item from './Item/Item'
-import { useEffect, useState } from 'react'
-
+import { useContext, useEffect, useState } from 'react'
+import ProductContext from '../../store/product-context'
 
 const AvailableItems = () => {
   const [totalItems, setTotalItems] = useState([])
   const [Items, setItems] = useState([])
+  const productCtx = useContext(ProductContext)
 
   useEffect(() => {
-    let fetching = true;
-    const fetchItems = async () => {
-      const response = await fetch("https://adi36n-easy-med.herokuapp.com/products");
-      if (!fetching)
-        return
-      const responseData = await response.json();
-      if (!response.ok) {
-        throw new Error('something went worng');
-      }
-      const loadedItems = []
-      for (const key in responseData) {
-        loadedItems.push(
-          <Item
-            key={responseData[key]._id}
-            id={responseData[key]._id}
-            name={responseData[key].name}
-            price={responseData[key].price}
-            rate={responseData[key].rate}
-            description={responseData[key].description}
-          />
-        )
-      }
-      setTotalItems(loadedItems)
-      setItems(loadedItems)
+    const products = productCtx.products
+    console.log(productCtx.products)
+    const loadedItems = []
+    for (const key in products) {
+      loadedItems.push(
+        <Item
+          key={products[key]._id}
+          id={products[key]._id}
+          name={products[key].name}
+          price={products[key].price}
+          rate={products[key].rate}
+          description={products[key].description}
+        />
+      )
     }
-
-    fetchItems()
-    return () => (fetching = false)
-  }, [])
+    setTotalItems(loadedItems)
+    setItems(loadedItems)
+  }, [productCtx])
 
   const filterProductHandler = (event) => {
     const userInput = event.target.value.trim().toUpperCase()
