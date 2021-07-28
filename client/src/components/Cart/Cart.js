@@ -5,7 +5,6 @@ import CartContext from '../../store/cart-context'
 import { useContext, useState } from 'react'
 import Checkout from "./Checkout"
 
-const URL = process.env.API_URL
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext)
@@ -13,7 +12,7 @@ const Cart = (props) => {
 
   const placeOrderHandler = async (userDetails) => {
 
-    const response = await fetch(`${URL}/orders`, {
+    const response = await fetch("https://adi36n-easy-med.herokuapp.com/orders", {
       method: "post",
       headers: {
         'Accept': 'application/json',

@@ -3,8 +3,6 @@ import Input from "../UI/Input";
 import classes from './AddItem.module.css'
 import { useCookies } from 'react-cookie'
 
-const URL = process.env.API_URL
-
 const AddItems = () => {
   const [cookies] = useCookies(['jwt'])
 
@@ -69,7 +67,7 @@ const AddItems = () => {
       price: +enteredPrice
     }
 
-    const response = await fetch(`${URL}/products`, {
+    const response = await fetch("https://adi36n-easy-med.herokuapp.com/products", {
       method: "post",
       headers: {
         'Accept': 'application/json',

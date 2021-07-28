@@ -9,7 +9,6 @@ import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import CartContext from "./store/cart-context";
 
-const URL = process.env.API_URL
 
 function App() {
   const cartCtx = useContext(CartContext)
@@ -17,7 +16,7 @@ function App() {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const response = await fetch(`${URL}/users/verify`, {
+      const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/verify", {
         method: "post",
         headers: {
           'Accept': 'application/json',

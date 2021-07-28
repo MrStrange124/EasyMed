@@ -3,7 +3,6 @@ import Card from '../UI/Card'
 import Item from './Item/Item'
 import { useEffect, useState } from 'react'
 
-const URL = process.env.API_URL
 
 const AvailableItems = () => {
   const [totalItems, setTotalItems] = useState([])
@@ -12,7 +11,7 @@ const AvailableItems = () => {
   useEffect(() => {
     let fetching = true;
     const fetchItems = async () => {
-      const response = await fetch(`${URL}/products`);
+      const response = await fetch("https://adi36n-easy-med.herokuapp.com/products");
       if (!fetching)
         return
       const responseData = await response.json();

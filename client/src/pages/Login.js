@@ -3,7 +3,6 @@ import { useCookies } from 'react-cookie'
 import { FaUserAlt, FaLock, FaEnvelope, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa'
 import './Login.css'
 
-const URL = process.env.API_URL
 
 const Login = () => {
   const [isActive, setIsActive] = useState(true)
@@ -23,7 +22,7 @@ const Login = () => {
     event.preventDefault()
     if (usernameRef.current.value.length < 5 || passwordRef.current.value.length < 4)
       return
-    const response = await fetch(`${URL}/users/login`, {
+    const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/login", {
       method: "post",
       headers: {
         'Accept': 'application/json',
