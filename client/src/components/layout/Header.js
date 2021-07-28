@@ -6,11 +6,12 @@ import { useContext } from 'react'
 import { FaCartPlus } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-
+import ProductContext from '../../store/product-context'
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false)
   const [homeBtn, setHomeBtn] = useState(false)
+  const productCtx = useContext(ProductContext)
   const { pathname } = useLocation()
   const [cookies, setCookie] = useCookies(['jwt'])
 
@@ -26,6 +27,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     setHomeBtn(false)
+    productCtx.setIsLoading(true)
     const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/logout", {
       method: "post",
       headers: {
@@ -34,6 +36,7 @@ const Header = () => {
         'Authorization': `Bearer ${cookies.jwt}`
       }
     })
+    productCtx.setIsLoading(false)
     if (!response.ok) {
       console.log('something went wrong')
       return

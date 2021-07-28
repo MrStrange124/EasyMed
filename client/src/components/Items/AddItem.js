@@ -58,11 +58,15 @@ const AddItems = () => {
   }
   const submitHandler = async (event) => {
     event.preventDefault();
+
     const isFormValid = enteredNameIsValid && enteredDescriptionIsValid && enteredPriceIsValid && enteredRateIsValid
     if (!isFormValid) {
       formTouched()
       return
     }
+
+    ProductCtx.setIsLoading(true)
+
     const itemDetail = {
       name: enteredName,
       description: enteredDescription,
@@ -79,6 +83,9 @@ const AddItems = () => {
       },
       body: JSON.stringify(itemDetail)
     })
+
+    ProductCtx.setIsLoading(false)
+
     if (!response.ok) {
       alert('something went worng.')
       return

@@ -2,16 +2,18 @@ import Modal from "../UI/Modal"
 import classes from './Cart.module.css'
 import CartItem from "./CartItem"
 import CartContext from '../../store/cart-context'
+import ProductContext from "../../store/product-context"
 import { useContext, useState } from 'react'
 import Checkout from "./Checkout"
 
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext)
+  const ProductCtx = useContext(ProductContext)
   const [showCartitems, setShowCartitems] = useState(true)
 
   const placeOrderHandler = async (userDetails) => {
-
+    ProductCtx.setIsLoading(true)
     const response = await fetch("https://adi36n-easy-med.herokuapp.com/orders", {
       method: "post",
       headers: {
@@ -24,6 +26,7 @@ const Cart = (props) => {
         totalAmount: cartCtx.totalAmount
       })
     })
+    ProductCtx.setIsLoading(false)
     if (!response.ok) {
       alert("something went wrong")
       return

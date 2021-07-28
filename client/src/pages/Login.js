@@ -1,5 +1,7 @@
+import { useContext } from 'react'
 import { useRef, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import ProductContext from '../store/product-context'
 import { FaUserAlt, FaLock, FaEnvelope, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa'
 import './Login.css'
 
@@ -8,6 +10,7 @@ const Login = () => {
   const [isActive, setIsActive] = useState(true)
   const [invalidCredentials, setInvalidCredentials] = useState(false)
   const [cookies, setCookie] = useCookies(['jwt']);
+  const ProductCtx = useContext(ProductContext)
   const usernameRef = useRef()
   const passwordRef = useRef()
 
@@ -22,6 +25,7 @@ const Login = () => {
     event.preventDefault()
     if (usernameRef.current.value.length < 5 || passwordRef.current.value.length < 4)
       return
+    ProductCtx.setIsLoading(true)
     const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/login", {
       method: "post",
       headers: {
@@ -33,6 +37,7 @@ const Login = () => {
         password: passwordRef.current.value
       })
     })
+    ProductCtx.setIsLoading(false)
     if (response.status === 401) {
       setInvalidCredentials(true)
       return

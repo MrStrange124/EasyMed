@@ -11,7 +11,6 @@ const AvailableItems = () => {
 
   useEffect(() => {
     const products = productCtx.products
-    console.log(productCtx.products)
     const loadedItems = []
     for (const key in products) {
       loadedItems.push(

@@ -9,13 +9,15 @@ import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import CartContext from "./store/cart-context";
 import ProductContext from "./store/product-context";
-
+import Loading from "./components/UI/Loading";
 
 function App() {
   const cartCtx = useContext(CartContext)
   const [cookies] = useCookies(['jwt'])
   const productCtx = useContext(ProductContext)
+
   useEffect(() => {
+    productCtx.setIsLoading(true)
     const checkLogin = async () => {
       const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/verify", {
         method: "post",
@@ -42,12 +44,15 @@ function App() {
         throw new Error('something went worng');
       }
       productCtx.loadProduct(responseData)
+      productCtx.setIsLoading(false)
     }
     fetchItems()
+
   }, [cookies.jwt])
 
   return (
     <>
+      {productCtx.isLoading && <Loading />}
       <Header />
       <Switch>
 
