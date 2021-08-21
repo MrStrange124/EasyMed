@@ -4,20 +4,22 @@ import Cart from '../Cart/Cart'
 import CartContext from '../../store/cart-context'
 import { useContext } from 'react'
 import { FaCartPlus } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import ProductContext from '../../store/product-context'
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false)
   const [homeBtn, setHomeBtn] = useState(false)
+  const [orderBtn, setOrderBtn] = useState(false)
   const productCtx = useContext(ProductContext)
   const { pathname } = useLocation()
+  const history = useHistory()
   const [cookies, setCookie] = useCookies(['jwt'])
 
   useEffect(() => {
-    if (pathname === '/login')
-      setHomeBtn(true)
+    if (pathname === '/admin/products')
+      setOrderBtn(true)
   }, [pathname])
 
   const cartCtx = useContext(CartContext)
@@ -28,7 +30,7 @@ const Header = () => {
   const logoutHandler = async () => {
     setHomeBtn(false)
     productCtx.setIsLoading(true)
-    const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/logout", {
+    const response = await fetch("http://localhost:5000/users/logout", {
       method: "post",
       headers: {
         'Accept': 'application/json',
@@ -42,14 +44,15 @@ const Header = () => {
       return
     }
     cartCtx.setLogin(false)
-    setCookie('jwt', '')
+    setCookie('jwt', '', { path: '/' })
+    history.push('/Home')
   }
 
   return (
     <nav className={classes.navbar}>
       <a className={classes.navbar_brand} href="#brandname">EasyMed</a>
       <div className={classes.nav_container}>
-        <button className={classes.btn} onClick={() => setShowCart(true)}><FaCartPlus /> Cart <span className={classes.cart_item}>{totalItems}</span> </button>
+        {!cartCtx.isLoggedin && <button className={classes.btn} onClick={() => setShowCart(true)}><FaCartPlus /> Cart <span className={classes.cart_item}>{totalItems}</span> </button>}
         {!cartCtx.isLoggedin &&
           <Link
             to={!homeBtn ? "/Login" : "/Home"}
@@ -58,6 +61,13 @@ const Header = () => {
             }>{homeBtn ? "Home" : "Login"}
           </Link>}
         {cartCtx.isLoggedin && <button className={classes.btn} onClick={logoutHandler}>Logout</button>}
+        {cartCtx.isLoggedin &&
+          <Link
+            to={!orderBtn ? "/admin/products" : "/admin/orders"}
+            className={classes.btn}
+            onClick={() => setOrderBtn(!orderBtn)
+            }>{orderBtn ? "Orders" : "Products"}
+          </Link>}
         {showCart && <Cart onClose={() => setShowCart(false)} />}
       </div>
     </nav>

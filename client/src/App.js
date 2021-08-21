@@ -1,8 +1,9 @@
 import Header from "./components/layout/Header";
-import Main from "./components/layout/Main";
+// import Main from "./components/layout/Main";
 import AvailableItems from "./components/Items/AvailableItems";
 import AddItem from './components/Items/AddItem'
-import { Redirect, Route, Switch } from "react-router-dom";
+import Orders from "./pages/Orders";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import Login from './pages/Login'
 import './App.css'
 import { useContext, useEffect } from "react";
@@ -13,13 +14,13 @@ import Loading from "./components/UI/Loading";
 
 function App() {
   const cartCtx = useContext(CartContext)
+  const history = useHistory()
   const [cookies] = useCookies(['jwt'])
   const productCtx = useContext(ProductContext)
 
   useEffect(() => {
-    productCtx.setIsLoading(true)
     const checkLogin = async () => {
-      const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/verify", {
+      const response = await fetch("http://localhost:5000/users/verify", {
         method: "post",
         headers: {
           'Accept': 'application/json',
@@ -29,16 +30,25 @@ function App() {
       })
       if (response.ok)
         cartCtx.setLogin(true)
+      else
+        history.push('/Home')
     }
     if (cookies.jwt) {
       checkLogin()
     }
-    else
+    else {
       cartCtx.setLogin(false)
+      history.push('/Home')
+    }
 
-    //fetching products from server
+  }, [])
+
+  useEffect(() => {
+    productCtx.setIsLoading(true)
+
+    //fetching products from server  https://adi36n-easy-med.herokuapp.com
     const fetchItems = async () => {
-      const response = await fetch("https://adi36n-easy-med.herokuapp.com/products");
+      const response = await fetch("http://localhost:5000/products");
       const responseData = await response.json();
       if (!response.ok) {
         throw new Error('something went worng');
@@ -48,8 +58,7 @@ function App() {
     }
     fetchItems()
 
-  }, [cookies.jwt])
-
+  }, [])
   return (
     <>
       {productCtx.isLoading && <Loading />}
@@ -57,20 +66,21 @@ function App() {
       <Switch>
 
         <Route path="/Home">
-          <Main />
+          {/* <Main /> */}
           <AvailableItems />
-          {cartCtx.isLoggedin && <Redirect to="/Admin" />}
         </Route>
 
         <Route path="/Login" >
           <Login />
-          {cartCtx.isLoggedin && <Redirect to="/Admin" />}
         </Route>
 
-        <Route path="/Admin" >
-          {!cartCtx.isLoggedin && <Redirect to="/Home" />}
+        <Route path="/admin/products">
           <AddItem />
           <AvailableItems />
+        </Route>
+
+        <Route path="/admin/orders" >
+          <Orders />
         </Route>
 
         <Route path="*">

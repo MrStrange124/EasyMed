@@ -74,7 +74,7 @@ const AddItems = () => {
       price: +enteredPrice
     }
 
-    const response = await fetch("https://adi36n-easy-med.herokuapp.com/products", {
+    const response = await fetch("http://localhost:5000/products", {
       method: "post",
       headers: {
         'Accept': 'application/json',
