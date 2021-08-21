@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { useRef, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import ProductContext from '../store/product-context'
+import CartContext from '../store/cart-context'
 import { FaUserAlt, FaLock, FaEnvelope, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa'
 import './Login.css'
 import { useHistory } from 'react-router-dom'
@@ -13,6 +14,7 @@ const Login = () => {
   const [cookies, setCookie] = useCookies(['jwt']);
   const history = useHistory()
   const ProductCtx = useContext(ProductContext)
+  const cartCtx = useContext(CartContext)
   const usernameRef = useRef()
   const passwordRef = useRef()
 
@@ -45,6 +47,7 @@ const Login = () => {
       return
     }
     const responseData = await response.json()
+    cartCtx.setLogin(true)
     setCookie('jwt', responseData.token, { maxAge: 60 * 60 * 24 * 30, path: '/' });
     history.push('/admin/orders')
   }

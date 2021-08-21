@@ -1,0 +1,60 @@
+.title {
+	padding: 1rem;
+	text-align: center;
+	font-family: sans-serif;
+}
+.container {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+}
+.order {
+	padding: 0.5rem;
+	border: 2px solid black;
+	border-radius: 1rem;
+	display: flex;
+	width: 100%;
+	font-family: sans-serif;
+	margin: 0.5rem 0;
+}
+.person {
+	border-right: 2px solid black;
+	padding: 1rem 0.5rem;
+	flex: 2;
+}
+.person > h2 {
+	font-size: 1.3rem;
+}
+.person > h4 {
+	color: #6e7c7c;
+	padding: 0.1rem 0;
+}
+.person > p {
+	font-size: 0.9rem;
+}
+.items {
+	flex: 3;
+	padding: 0.5rem;
+	/* border-left: 2px solid #000000; */
+	display: flex;
+	flex-direction: column;
+}
+.item {
+	width: 100%;
+	border-bottom: 1px solid black;
+	display: flex;
+	padding: 0.5rem 0 0.2rem 0;
+	flex: 1;
+}
+.item_name {
+	flex: 1;
+}
+.rate {
+	flex: 1;
+}
+.totalAmount {
+	font-size: 1rem;
+	padding-top: 0.3rem;
+	text-align: right;
+}
