@@ -25,8 +25,11 @@ const Order = props => {
     }
     return Items
   }
+  let date = new Date(props.date).toDateString()
+  date += ", " + new Date(props.date).toLocaleTimeString()
   return <div className={classes.order}>
     <div className={classes.person}>
+      <p className={classes.date}>{date}</p>
       <h2>{props.customer.name}</h2>
       <h4>{props.customer.number}</h4>
       <p>{props.customer.address},  {props.customer.pincode}</p>
@@ -71,6 +74,7 @@ const Orders = () => {
           customer={orders[key].customer}
           totalAmount={orders[key].totalAmount}
           items={orders[key].Items}
+          date={orders[key].createdAt}
         />
       )
     }

@@ -6,7 +6,8 @@ const router = express.Router()
 
 router.get('/orders', auth, async (req, res) => {
   try {
-    const orders = await Order.find({})
+    const { page = 1, limit = 10 } = req.query
+    const orders = await Order.find({}).sort({ createdAt: -1 }).limit(+limit).skip(limit * (page - 1))
     res.send(orders)
   } catch (e) {
     res.status(400).send(e)

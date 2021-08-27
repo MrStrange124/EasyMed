@@ -20,7 +20,7 @@
 }
 .person {
 	border-right: 2px solid black;
-	padding: 1rem 0.5rem;
+	padding: 0.5rem;
 	flex: 2;
 }
 .person > h2 {
@@ -57,4 +57,10 @@
 	font-size: 1rem;
 	padding-top: 0.3rem;
 	text-align: right;
+}
+.date {
+	color: #ee5253;
+	text-align: right;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
 }
