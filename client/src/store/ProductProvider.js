@@ -12,9 +12,7 @@ const ProductProvider = props => {
 
   const setLoadingHandler = value => {
     if (!value) {
-      setTimeout(() => {
-        setLoading(value)
-      }, 1300)
+      setLoading(value)
     }
     else
       setLoading(value)

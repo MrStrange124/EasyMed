@@ -5,10 +5,13 @@ import useInput from "../../hooks/use-Input"
 const validatePhone = (value) => {
   if (value.includes('+91'))
     value = value.slice(3)
-
-  if (value.length === 10 && !isNaN(+value)) {
+  else if (value[0] === '0')
+    value = value.slice(1)
+  else if (value.length == 12 && value[0] === '9' && value[1] === '1')
     return true
-  }
+  if (value.length === 10 && !isNaN(+value))
+    return true
+
 
   return false
 }
@@ -72,8 +75,7 @@ const Checkout = (props) => {
     }
 
     let num = enteredNumber
-    if (num.length === 13)
-      num = num.slice(3)
+    num = num.slice(-10)
 
     const userDetails = {
       name: enteredName,

@@ -8,7 +8,8 @@ router.get('/orders', auth, async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query
     const orders = await Order.find({}).sort({ createdAt: -1 }).limit(+limit).skip(limit * (page - 1))
-    res.send(orders)
+    const totalOrders = await Order.countDocuments({})
+    res.send({ orders, totalOrders })
   } catch (e) {
     res.status(400).send(e)
   }

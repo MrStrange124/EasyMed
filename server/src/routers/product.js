@@ -16,8 +16,7 @@ router.post('/products', auth, async (req, res) => {
 
 router.get('/products', async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query
-    const products = await Product.find({}).sort({ name: 1 }).limit(+limit).skip(limit * (page - 1))
+    const products = await Product.find({})
     res.send(products)
   } catch (e) {
     res.status(400).send(e)

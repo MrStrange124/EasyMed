@@ -1,5 +1,8 @@
+import { useContext } from "react"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
+import Swiper from "../components/UI/Swiper"
+import ProductContext from "../store/product-context"
 import classes from "./Orders.module.css"
 
 const Item = props => {
@@ -11,8 +14,8 @@ const Item = props => {
 }
 
 const Order = props => {
-  const Items = []
   const fillItems = (items) => {
+    const Items = []
     for (const key in items) {
       Items.push(
         <Item
@@ -44,29 +47,37 @@ const Order = props => {
 const Orders = () => {
   const [orders, setOrders] = useState([])
   const [cookies] = useCookies(['jwt'])
+  const [pageNo, setPageNo] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const productCtx = useContext(ProductContext)
+
+  const fetchOrders = async (page = 1) => {
+    productCtx.setIsLoading(true)
+    const url = "http://localhost:5000/orders?page=" + page
+    const response = await fetch(url, {
+      method: "get",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${cookies.jwt}`
+      }
+    })
+    productCtx.setIsLoading(false)
+    if (!response.ok) {
+      console.log('something went wrong')
+      return
+    }
+    const responseData = await response.json();
+    setOrders(responseData.orders)
+    setTotalPages(Math.ceil(responseData.totalOrders / 10))
+  }
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      const response = await fetch("http://localhost:5000/orders", {
-        method: "get",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${cookies.jwt}`
-        }
-      })
-      if (!response.ok) {
-        console.log('something went wrong')
-        return
-      }
-      const responseData = await response.json();
-      setOrders(responseData)
-    }
     fetchOrders()
   }, [cookies.jwt])
 
-  const allOrders = []
   const fillOrders = orders => {
+    const allOrders = []
     for (const key in orders) {
       allOrders.push(
         <Order
@@ -80,11 +91,27 @@ const Orders = () => {
     }
     return allOrders
   }
+
+  const nextPage = () => {
+    if (pageNo === totalPages)
+      return
+    fetchOrders(pageNo + 1)
+    setPageNo(pageNo + 1)
+  }
+
+  const prevPage = () => {
+    if (pageNo === 1)
+      return
+    fetchOrders(pageNo - 1)
+    setPageNo(pageNo - 1)
+  }
+
   return (
     <>
       <h1 className={classes.title}>Orders</h1>
       <div className={classes.container}>
         {fillOrders(orders)}
+        <Swiper nextPage={nextPage} prevPage={prevPage} page={pageNo} totalPages={totalPages} />
       </div>
     </>
   )
