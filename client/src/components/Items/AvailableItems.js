@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useCookies } from "react-cookie"
 import ProductContext from '../../store/product-context'
 import Swiper from '../UI/Swiper'
+import EditItem from './EditItem'
 
 const AvailableItems = (props) => {
   const [totalItems, setTotalItems] = useState([])
@@ -13,6 +14,8 @@ const AvailableItems = (props) => {
   const [pageNo, setPageNo] = useState(1)
   const productCtx = useContext(ProductContext)
   const [cookies] = useCookies(['jwt'])
+  const [editModal, setEditModal] = useState(false)
+  const [product, setProduct] = useState({})
 
   const limit = 10;
   const changePage = (page) => {
@@ -41,8 +44,10 @@ const AvailableItems = (props) => {
     }
     alert('Successfully deleted')
     props.fetchItems()
-    if (totalItems.length % limit === 0)
-      setPageNo(Math.ceil(totalItems.length / limit))
+    setPageNo(1)
+  }
+  const EditHandler = (key) => {
+    setProduct(productCtx.products[key])
   }
   useEffect(() => {
     const products = productCtx.products
@@ -57,6 +62,10 @@ const AvailableItems = (props) => {
           rate={products[key].rate}
           description={products[key].description}
           onDelete={() => { deleteItemHandler(products[key]._id) }}
+          onEdit={() => {
+            setEditModal(true)
+            EditHandler(key)
+          }}
         />
       )
     }
@@ -82,6 +91,7 @@ const AvailableItems = (props) => {
 
   return (
     <section className={classes.item_container}>
+      {editModal && <EditItem onClose={() => setEditModal(false)} fetchItems={props.fetchItems} product={product} />}
       <Card>
         <input
           type="text"

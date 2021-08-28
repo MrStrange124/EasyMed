@@ -45,7 +45,7 @@ const Item = (props) => {
       {
         cartCtx.isLoggedin &&
         <div className={classes.item_foam}>
-          <FaEdit className={classes.edit} />
+          <FaEdit className={classes.edit} onClick={props.onEdit} />
           <FaTrashAlt className={classes.delete} onClick={props.onDelete} />
         </div>
       }
