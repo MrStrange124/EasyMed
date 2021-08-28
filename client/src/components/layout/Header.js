@@ -20,6 +20,8 @@ const Header = () => {
   useEffect(() => {
     if (pathname === '/admin/products')
       setOrderBtn(true)
+    else
+      setOrderBtn(false)
   }, [pathname])
 
   const cartCtx = useContext(CartContext)

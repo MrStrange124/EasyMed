@@ -2,7 +2,7 @@ import classes from './Item.module.css'
 import React from "react";
 import CartContext from '../../../store/cart-context.js'
 import { useContext, useRef } from 'react'
-
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 
 const Item = (props) => {
   const percentage = Math.floor((props.price - props.rate) / props.price * 100)
@@ -29,7 +29,8 @@ const Item = (props) => {
         <span className={classes.price}>₹{props.price}</span>
         <span className={classes.percentage}>{percentage}% off</span>
       </div>
-      <div className={classes.item_foam}>
+
+      {!cartCtx.isLoggedin && <div className={classes.item_foam}>
         <input
           type="number"
           className={classes.input}
@@ -40,6 +41,14 @@ const Item = (props) => {
         />
         <button className={classes.add_btn} onClick={() => addToCartHandler(+inputRef.current.value)} >Add to Cart</button>
       </div>
+      }
+      {
+        cartCtx.isLoggedin &&
+        <div className={classes.item_foam}>
+          <FaEdit className={classes.edit} />
+          <FaTrashAlt className={classes.delete} onClick={props.onDelete} />
+        </div>
+      }
     </li>
   )
 }

@@ -34,8 +34,7 @@
 	width: 25%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: 0.5rem;
+	justify-content: space-evenly;
 }
 
 .add_btn {
@@ -56,7 +55,18 @@
 	text-align: right;
 	-moz-appearance: textfield;
 }
-
+.edit {
+	cursor: pointer;
+	height: 1.5rem;
+	width: 1.5rem;
+	color: #1dd1a1;
+}
+.delete {
+	cursor: pointer;
+	height: 1.5rem;
+	width: 1.5rem;
+	color: #ee5253;
+}
 @media (max-width: 800px) {
 	/* .product_details {
 	} */

@@ -1,7 +1,7 @@
 const { useState } = require("react")
 
-const useInput = (validateValue) => {
-  const [enteredValue, setEnteredValue] = useState('');
+const useInput = (validateValue, value = '') => {
+  const [enteredValue, setEnteredValue] = useState(value);
   const [isTouched, setIsTouched] = useState(false);
   const valueIsValid = validateValue(enteredValue)
   const hasError = !valueIsValid && isTouched

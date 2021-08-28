@@ -2,15 +2,17 @@ import classes from './AvailableItems.module.css'
 import Card from '../UI/Card'
 import Item from './Item/Item'
 import { useContext, useEffect, useState } from 'react'
+import { useCookies } from "react-cookie"
 import ProductContext from '../../store/product-context'
 import Swiper from '../UI/Swiper'
 
-const AvailableItems = () => {
+const AvailableItems = (props) => {
   const [totalItems, setTotalItems] = useState([])
   const [Items, setItems] = useState([])
   const [showSwiper, setShowSwiper] = useState(true)
   const [pageNo, setPageNo] = useState(1)
   const productCtx = useContext(ProductContext)
+  const [cookies] = useCookies(['jwt'])
 
   const limit = 10;
   const changePage = (page) => {
@@ -23,7 +25,25 @@ const AvailableItems = () => {
     setItems(temp)
     setPageNo(page)
   }
-
+  const deleteItemHandler = async (id) => {
+    const url = "http://localhost:5000/products/" + id
+    const response = await fetch(url, {
+      method: "delete",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${cookies.jwt}`
+      }
+    })
+    if (!response.ok) {
+      alert('something went worng.')
+      return
+    }
+    alert('Successfully deleted')
+    props.fetchItems()
+    if (totalItems.length % limit === 0)
+      setPageNo(Math.ceil(totalItems.length / limit))
+  }
   useEffect(() => {
     const products = productCtx.products
     const loadedItems = []
@@ -36,6 +56,7 @@ const AvailableItems = () => {
           price={products[key].price}
           rate={products[key].rate}
           description={products[key].description}
+          onDelete={() => { deleteItemHandler(products[key]._id) }}
         />
       )
     }

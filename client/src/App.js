@@ -43,19 +43,19 @@ function App() {
 
   }, [])
 
+  //fetching products from server  https://adi36n-easy-med.herokuapp.com
+  const fetchItems = async () => {
+    const response = await fetch("http://localhost:5000/products");
+    const responseData = await response.json();
+    productCtx.setIsLoading(false)
+    if (!response.ok) {
+      throw new Error('something went worng');
+    }
+    productCtx.loadProduct(responseData)
+  }
+
   useEffect(() => {
     productCtx.setIsLoading(true)
-
-    //fetching products from server  https://adi36n-easy-med.herokuapp.com
-    const fetchItems = async () => {
-      const response = await fetch("http://localhost:5000/products");
-      const responseData = await response.json();
-      if (!response.ok) {
-        throw new Error('something went worng');
-      }
-      productCtx.loadProduct(responseData)
-      productCtx.setIsLoading(false)
-    }
     fetchItems()
 
   }, [])
@@ -67,7 +67,7 @@ function App() {
 
         <Route path="/Home">
           {/* <Main /> */}
-          <AvailableItems />
+          <AvailableItems fetchItems={fetchItems} />
         </Route>
 
         <Route path="/Login" >
@@ -75,8 +75,8 @@ function App() {
         </Route>
 
         <Route path="/admin/products">
-          <AddItem />
-          <AvailableItems />
+          <AddItem fetchItems={fetchItems} />
+          <AvailableItems fetchItems={fetchItems} />
         </Route>
 
         <Route path="/admin/orders" >

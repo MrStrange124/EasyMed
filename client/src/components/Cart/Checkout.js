@@ -7,7 +7,7 @@ const validatePhone = (value) => {
     value = value.slice(3)
   else if (value[0] === '0')
     value = value.slice(1)
-  else if (value.length == 12 && value[0] === '9' && value[1] === '1')
+  else if (value.length === 12 && value[0] === '9' && value[1] === '1')
     return true
   if (value.length === 10 && !isNaN(+value))
     return true

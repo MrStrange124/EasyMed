@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie'
 import ProductContext from '../../store/product-context'
 import { useContext } from "react";
 
-const AddItems = () => {
+const AddItems = (props) => {
   const [cookies] = useCookies(['jwt'])
   const ProductCtx = useContext(ProductContext)
 
@@ -90,12 +90,9 @@ const AddItems = () => {
       alert('something went worng.')
       return
     }
-
     resetForm()
     alert("Your Item has been added successfully.")
-
-    const temp = [...ProductCtx.products, { ...itemDetail, _id: Math.random().toString() }]
-    ProductCtx.loadProduct(temp)
+    props.fetchItems()
   }
   return (
     <section className={classes.container}>
