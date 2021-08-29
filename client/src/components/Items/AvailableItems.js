@@ -29,6 +29,8 @@ const AvailableItems = (props) => {
     setPageNo(page)
   }
   const deleteItemHandler = async (id) => {
+    if (!window.confirm('Are you sure to delete this item?'))
+      return
     const url = "http://localhost:5000/products/" + id
     const response = await fetch(url, {
       method: "delete",
@@ -42,7 +44,6 @@ const AvailableItems = (props) => {
       alert('something went worng.')
       return
     }
-    alert('Successfully deleted')
     props.fetchItems()
     setPageNo(1)
   }

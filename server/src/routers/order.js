@@ -24,5 +24,12 @@ router.post('/orders', async (req, res) => {
     res.status(500).send(e)
   }
 })
-
+router.delete('/orders/:id', auth, async (req, res) => {
+  try {
+    const order = await Order.findByIdAndDelete(req.params.id)
+    res.send(order)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
 module.exports = router

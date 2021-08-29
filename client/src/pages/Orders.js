@@ -33,7 +33,7 @@ const Order = props => {
   date += ", " + new Date(props.date).toLocaleTimeString()
   return <div className={classes.order}>
     <div className={classes.person}>
-      <FaTrashAlt className={classes.delete} />
+      <FaTrashAlt className={classes.delete} onClick={() => props.onDelete(props._id)} />
       <p className={classes.date}>{date}</p>
       <h2>{props.customer.name}</h2>
       <h4>{props.customer.number}</h4>
@@ -75,6 +75,28 @@ const Orders = () => {
     setTotalPages(Math.ceil(responseData.totalOrders / 10))
   }
 
+  const deleteOrderHandler = async (id) => {
+    if (!window.confirm('Are you sure to delete this order?'))
+      return
+    productCtx.setIsLoading(true)
+    const url = "http://localhost:5000/orders/" + id
+    const response = await fetch(url, {
+      method: "delete",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${cookies.jwt}`
+      }
+    })
+
+    productCtx.setIsLoading(false)
+    if (!response.ok) {
+      alert('something went worng.')
+      return
+    }
+    fetchOrders()
+  }
+
   useEffect(() => {
     fetchOrders()
   }, [cookies.jwt])
@@ -89,6 +111,8 @@ const Orders = () => {
           totalAmount={orders[key].totalAmount}
           items={orders[key].Items}
           date={orders[key].createdAt}
+          _id={orders[key]._id}
+          onDelete={deleteOrderHandler}
         />
       )
     }
