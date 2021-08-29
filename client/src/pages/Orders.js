@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie"
 import Swiper from "../components/UI/Swiper"
 import ProductContext from "../store/product-context"
 import classes from "./Orders.module.css"
-import { FaTrashAlt } from 'react-icons/fa'
+import { FaTrashAlt, FaRedoAlt } from 'react-icons/fa'
 
 const Item = props => {
   return <div className={classes.item}>
@@ -56,7 +56,7 @@ const Orders = () => {
 
   const fetchOrders = async (page = 1) => {
     productCtx.setIsLoading(true)
-    const url = "http://localhost:5000/orders?page=" + page
+    const url = "https://adi36n-easy-med.herokuapp.com/orders?page=" + page
     const response = await fetch(url, {
       method: "get",
       headers: {
@@ -79,7 +79,7 @@ const Orders = () => {
     if (!window.confirm('Are you sure to delete this order?'))
       return
     productCtx.setIsLoading(true)
-    const url = "http://localhost:5000/orders/" + id
+    const url = "https://adi36n-easy-med.herokuapp.com/orders/" + id
     const response = await fetch(url, {
       method: "delete",
       headers: {
@@ -135,7 +135,7 @@ const Orders = () => {
 
   return (
     <>
-      <h1 className={classes.title}>Orders</h1>
+      <h1 className={classes.title}>Orders <FaRedoAlt className={classes.reload} onClick={fetchOrders} /></h1>
       <div className={classes.container}>
         {fillOrders(orders)}
         <Swiper nextPage={nextPage} prevPage={prevPage} page={pageNo} totalPages={totalPages} />

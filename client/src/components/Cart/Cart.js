@@ -14,7 +14,7 @@ const Cart = (props) => {
 
   const placeOrderHandler = async (userDetails) => {
     ProductCtx.setIsLoading(true)
-    const response = await fetch("http://localhost:5000/orders", {
+    const response = await fetch("https://adi36n-easy-med.herokuapp.com/orders", {
       method: "post",
       headers: {
         'Accept': 'application/json',

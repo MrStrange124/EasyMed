@@ -30,7 +30,7 @@ const Login = () => {
     if (usernameRef.current.value.length < 5 || passwordRef.current.value.length < 4)
       return
     ProductCtx.setIsLoading(true)
-    const response = await fetch("http://localhost:5000/users/login", {
+    const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/login", {
       method: "post",
       headers: {
         'Accept': 'application/json',

@@ -32,7 +32,7 @@ const Header = () => {
   const logoutHandler = async () => {
     setHomeBtn(false)
     productCtx.setIsLoading(true)
-    const response = await fetch("http://localhost:5000/users/logout", {
+    const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/logout", {
       method: "post",
       headers: {
         'Accept': 'application/json',

@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const response = await fetch("http://localhost:5000/users/verify", {
+      const response = await fetch("https://adi36n-easy-med.herokuapp.com/users/verify", {
         method: "post",
         headers: {
           'Accept': 'application/json',
@@ -43,10 +43,10 @@ function App() {
     }
 
   }, [])
-
+  // http://localhost:5000
   //fetching products from server  https://adi36n-easy-med.herokuapp.com
   const fetchItems = async () => {
-    const response = await fetch("http://localhost:5000/products");
+    const response = await fetch("https://adi36n-easy-med.herokuapp.com/products");
     const responseData = await response.json();
     productCtx.setIsLoading(false)
     if (!response.ok) {

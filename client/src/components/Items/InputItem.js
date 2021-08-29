@@ -73,7 +73,7 @@ const InputItem = (props) => {
             rate: +enteredRate,
             price: +enteredPrice
         }
-        let url = "http://localhost:5000/products"
+        let url = "https://adi36n-easy-med.herokuapp.com/products"
         if (props.method === "patch")
             url += '/' + props.product._id
         const response = await fetch(url, {
@@ -93,12 +93,15 @@ const InputItem = (props) => {
             return
         }
         resetForm()
+        props.fetchItems()
         if (props.method === "post")
             alert("Your Item has been added successfully.")
-        else
+        else {
+            console.log('hello')
+            props.onClose()
             alert("Your Item has been modified successfully.")
+        }
 
-        props.fetchItems()
     }
     return (
         <form className={classes.form} onSubmit={submitHandler}>

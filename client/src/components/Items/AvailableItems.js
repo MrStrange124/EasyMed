@@ -31,7 +31,8 @@ const AvailableItems = (props) => {
   const deleteItemHandler = async (id) => {
     if (!window.confirm('Are you sure to delete this item?'))
       return
-    const url = "http://localhost:5000/products/" + id
+    productCtx.setIsLoading(true)
+    const url = "https://adi36n-easy-med.herokuapp.com/products/" + id
     const response = await fetch(url, {
       method: "delete",
       headers: {
@@ -41,11 +42,13 @@ const AvailableItems = (props) => {
       }
     })
     if (!response.ok) {
+      productCtx.setIsLoading(false)
       alert('something went worng.')
       return
     }
     props.fetchItems()
     setPageNo(1)
+    productCtx.setIsLoading(false)
   }
   const EditHandler = (key) => {
     setProduct(productCtx.products[key])
