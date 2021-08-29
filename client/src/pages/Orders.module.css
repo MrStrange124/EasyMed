@@ -3,6 +3,10 @@
 	text-align: center;
 	font-family: sans-serif;
 }
+.item_title {
+	border-bottom: 1px solid black;
+	padding-bottom: 0.5rem;
+}
 .container {
 	margin: 0 auto;
 	display: flex;
@@ -64,4 +68,24 @@
 	text-align: right;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
+	padding-right: 1.5rem;
+}
+.delete {
+	float: right;
+	cursor: pointer;
+}
+@media (max-width: 900px) {
+	.order {
+		flex-direction: column;
+	}
+	.date {
+		padding-bottom: 1rem;
+	}
+	.person {
+		border: none;
+	}
+	.item_title {
+		font-size: 1rem;
+		padding: 0.3rem 0;
+	}
 }

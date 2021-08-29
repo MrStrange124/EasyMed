@@ -76,7 +76,21 @@
 	.description {
 		font-size: 0.8rem;
 	}
+	.product_details {
+		width: 65%;
+	}
+	.item_foam {
+		width: 35%;
+	}
+}
+@media (max-width: 600px) {
 	.item_foam {
 		flex-direction: column;
+	}
+	.input {
+		width: 70px;
+	}
+	.add_btn {
+		font-size: 0.7rem;
 	}
 }

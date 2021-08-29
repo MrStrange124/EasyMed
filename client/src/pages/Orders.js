@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie"
 import Swiper from "../components/UI/Swiper"
 import ProductContext from "../store/product-context"
 import classes from "./Orders.module.css"
+import { FaTrashAlt } from 'react-icons/fa'
 
 const Item = props => {
   return <div className={classes.item}>
@@ -32,12 +33,14 @@ const Order = props => {
   date += ", " + new Date(props.date).toLocaleTimeString()
   return <div className={classes.order}>
     <div className={classes.person}>
+      <FaTrashAlt className={classes.delete} />
       <p className={classes.date}>{date}</p>
       <h2>{props.customer.name}</h2>
       <h4>{props.customer.number}</h4>
       <p>{props.customer.address},  {props.customer.pincode}</p>
     </div>
     <div className={classes.items}>
+      <h3 className={classes.item_title}>Product Name</h3>
       {fillItems(props.items)}
       <h3 className={classes.totalAmount}>Total Amount: ₹{props.totalAmount} </h3>
     </div>
