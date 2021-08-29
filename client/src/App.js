@@ -1,5 +1,5 @@
 import Header from "./components/layout/Header";
-// import Main from "./components/layout/Main";
+import Main from "./components/layout/Main";
 import AvailableItems from "./components/Items/AvailableItems";
 import AddItem from './components/Items/AddItem'
 import Orders from "./pages/Orders";
@@ -11,6 +11,7 @@ import { useCookies } from "react-cookie";
 import CartContext from "./store/cart-context";
 import ProductContext from "./store/product-context";
 import Loading from "./components/UI/Loading";
+import Footer from "./components/layout/Footer";
 
 function App() {
   const cartCtx = useContext(CartContext)
@@ -66,7 +67,7 @@ function App() {
       <Switch>
 
         <Route path="/Home">
-          {/* <Main /> */}
+          <Main />
           <AvailableItems fetchItems={fetchItems} />
         </Route>
 
@@ -87,6 +88,7 @@ function App() {
           <Redirect to="/Home" />
         </Route>
       </Switch>
+      <Footer />
     </>
   );
 }
